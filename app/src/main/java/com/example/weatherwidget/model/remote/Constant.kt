@@ -1,5 +1,8 @@
 package com.example.weatherwidget.model.remote
 
+/*
+This class is responsible to add constant of project
+*/
 object Constant {
     //Luan  //API 1 https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
     //Alex  //API 2 api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
