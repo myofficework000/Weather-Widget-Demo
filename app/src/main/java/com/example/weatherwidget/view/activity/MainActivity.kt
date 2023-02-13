@@ -1,26 +1,41 @@
 package com.example.weatherwidget.view
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.weatherwidget.R
+import android.widget.Toast
 import com.example.weatherwidget.databinding.ActivityMainBinding
+import com.example.weatherwidget.model.remote.VolleyHandler
+import com.example.weatherwidget.model.remote.data_forecast.ForecastResponse
+import com.example.weatherwidget.presenter.mvp_forecast.ForecastPresenter
+import com.example.weatherwidget.presenter.mvp_forecast.MVPForecast
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),MVPForecast, MVPForecast.ForecastView {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var forecastPresenter: ForecastPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnAirPollution.setOnClickListener {
-            Intent(this, AirPollutionActivity::class.java).apply {
-                // Btw this is Long Beach, Los Angeles.
-                putExtra(AirPollutionActivity.AIR_POLLUTION_LATITUDE_ARG, 33.7701)
-                putExtra(AirPollutionActivity.AIR_POLLUTION_LONGITUDE_ARG, 118.1937)
-                startActivity(this)
-            }
+        initForecastPresenter()
+        binding.btnForecast.setOnClickListener {
+            forecastPresenter.getForecast()
         }
+    }
+    private fun initForecastPresenter() {
+       forecastPresenter = ForecastPresenter(VolleyHandler(this),this)
+    }
+
+    override fun onLoad(isLoading: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showError(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun setResult(forecastResponse: ForecastResponse) {
+        TODO("Not yet implemented")
     }
 }
