@@ -17,4 +17,16 @@ class WeatherFragment : Fragment() {
     ): View = FragmentWeatherBinding.inflate(inflater, container, false).apply {
         binding = this
     }.root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onStop() {
+        super.onStop()
+    }
 }

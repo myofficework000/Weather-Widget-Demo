@@ -5,9 +5,13 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.weatherwidget.fragment.ForecastFragment
-import com.example.weatherwidget.model.remote.data_airpollution.AirPollutionResponse
-import com.example.weatherwidget.presenter.mvp_air_pollution.MVPAirPollution
 import com.example.weatherwidget.model.remote.Constant.BASE_URL
+import com.example.weatherwidget.model.remote.Constant.END_POINT_WEATHER
+
+import com.example.weatherwidget.model.remote.data_airpollution.AirPollutionResponse
+import com.example.weatherwidget.model.remote.data_weather.OperationalCallBackWeather
+import com.example.weatherwidget.model.remote.data_weather.WeatherResponse
+import com.example.weatherwidget.presenter.mvp_air_pollution.MVPAirPollution
 import com.example.weatherwidget.model.remote.Constant.END_POINT_FORECAST
 import com.example.weatherwidget.model.remote.data_forecast.ForecastResponse
 import com.example.weatherwidget.model.remote.data_forecast.OperationalCallbackForeCast
@@ -15,9 +19,18 @@ import com.google.gson.Gson
 
 class VolleyHandler(private val context: Context?) {
     private val requestQueue by lazy { Volley.newRequestQueue(context) }
-
-    fun getWeatherData() {
-
+    fun getWeatherData(callback: OperationalCallBackWeather) {
+         val request = StringRequest(
+             Request.Method.GET,
+             "${Constant.BASE_URL}$END_POINT_WEATHER",
+             {
+                 val response = Gson().fromJson(it, WeatherResponse::class.java)
+                 callback.onSuccess(response)
+             },
+             {
+                callback.onFailure(it.toString())
+             }
+         )
     }
 
     fun getForecastData(callback: OperationalCallbackForeCast) {
@@ -37,6 +50,9 @@ class VolleyHandler(private val context: Context?) {
             }
         )
         requestQueue.add(request)
+
+    fun getForecastData() {
+
     }
 
     fun getZipCodeData() {
