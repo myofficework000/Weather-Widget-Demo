@@ -10,5 +10,4 @@ object Constant {
     const val END_POINT_FORECAST = "data/2.5/forecast?q=Chicago&appid=$API_KEY"
     const val END_POINT_AIR_POLLUTION = "data/2.5/air_pollution/forecast"
     const val END_POINT_ZIPCODE = "geo/1.0/zip?zip=81658&appid=$API_KEY"
-
 }
