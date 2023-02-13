@@ -10,6 +10,7 @@ interface MVPAirPollution {
     }
     interface IPresenter{
         fun getAirPollutionData(latitude: Double, longitude: Double)
+        fun getAirPollutionSummaryText(daqi: Int): String
     }
     interface IView{
         fun onSuccess(data: AirPollutionResponse?)

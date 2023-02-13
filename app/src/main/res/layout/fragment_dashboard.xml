@@ -26,7 +26,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/airPollutionFragmentView"
-            android:name="com.example.weatherwidget.fragment.AirPollutionFragment"
+            android:name="com.example.weatherwidget.view.fragment.AirPollutionFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_air_pollution" />

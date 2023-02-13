@@ -5,4 +5,7 @@
     <string name="api_error_title">Network Error</string>
     <string name="negative_button_1">Got it</string>
     <string name="api_no_data_text">(Data unavailable)</string>
+    <string name="airPollutionLabel1">Air Quality</string>
+    <string name="airPollutionLabel2">DAQI (GB)</string>
+    <string name="airPollutionSummaryText">(Loading...)</string>
 </resources>
