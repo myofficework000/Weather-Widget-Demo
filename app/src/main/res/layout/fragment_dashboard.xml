@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/weatherFragmentView"
+            android:name="com.example.weatherwidget.fragment.WeatherFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_weather" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/forecastFragmentView"
+            android:name="com.example.weatherwidget.fragment.ForecastFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_forecast" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/airPollutionFragmentView"
+            android:name="com.example.weatherwidget.fragment.AirPollutionFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/fragment_air_pollution" />
+    </LinearLayout>
+</ScrollView>
