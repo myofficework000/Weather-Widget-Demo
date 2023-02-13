@@ -31,6 +31,7 @@ class VolleyHandler(private val context: Context?) {
                 callback.onFailure(it.toString())
              }
          )
+        requestQueue.add(request)
     }
 
     fun getForecastData(callback: OperationalCallbackForeCast) {
@@ -50,9 +51,6 @@ class VolleyHandler(private val context: Context?) {
             }
         )
         requestQueue.add(request)
-
-    fun getForecastData() {
-
     }
 
     fun getZipCodeData() {
@@ -74,5 +72,4 @@ class VolleyHandler(private val context: Context?) {
             { callback.onError(it.message) }
         ).also { requestQueue.add(it) }
     }
-
 }

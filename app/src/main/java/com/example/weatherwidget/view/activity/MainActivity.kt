@@ -1,5 +1,6 @@
 package com.example.weatherwidget.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -22,10 +23,17 @@ class MainActivity : AppCompatActivity(),MVPForecast, MVPForecast.ForecastView {
         binding.btnAirPollution.setOnClickListener {
             Intent(this, AirPollutionActivity::class.java).apply {
                 // Btw this is Long Beach, Los Angeles.
-                putExtra(AirPollutionActivity.AIR_POLLUTION_LATITUDE_ARG, Constant.PLACEHOLDER_COORDS.first)
-                putExtra(AirPollutionActivity.AIR_POLLUTION_LONGITUDE_ARG, Constant.PLACEHOLDER_COORDS.second)
+                putExtra(
+                    AirPollutionActivity.AIR_POLLUTION_LATITUDE_ARG,
+                    Constant.PLACEHOLDER_COORDS.first
+                )
+                putExtra(
+                    AirPollutionActivity.AIR_POLLUTION_LONGITUDE_ARG,
+                    Constant.PLACEHOLDER_COORDS.second
+                )
                 startActivity(this)
             }
+        }
 
         initForecastPresenter()
         binding.btnForecast.setOnClickListener {
