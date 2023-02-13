@@ -13,4 +13,10 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="appCardView" parent="CardView">
+        <item name="android:layout_margin">@dimen/_10dp</item>
+        <item name="cardCornerRadius">@dimen/_10dp</item>
+        <item name="cardElevation">@dimen/_10dp</item>
+    </style>
 </resources>
