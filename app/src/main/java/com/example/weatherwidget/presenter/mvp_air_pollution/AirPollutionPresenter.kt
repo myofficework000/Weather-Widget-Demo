@@ -16,4 +16,14 @@ class AirPollutionPresenter(
             override fun onError(message: String?) { mvpView.onError(message) }
         })
     }
+
+    override fun getAirPollutionSummaryText(daqi: Int): String = "$daqi - ${
+        when (daqi) {
+            in 1..3 -> "Low"
+            in 4..6 -> "Moderate"
+            in 7..9 -> "High"
+            10 -> "Very High"
+            else -> "N/A"
+        }
+    }"
 }
