@@ -4,6 +4,6 @@ data class ForecastResponse(
     val city: City,
     val cnt: Int,
     val cod: String,
-    val list: List<ForecastList>,
+    val list: List<Forecast>,
     val message: Double
 )
