@@ -8,4 +8,10 @@
     <string name="airPollutionLabel1">Air Quality</string>
     <string name="airPollutionLabel2">DAQI (GB)</string>
     <string name="airPollutionSummaryText">(Loading...)</string>
+    <string name="txtDegree">18°</string>
+    <string name="txtWindSpeed">11MPH</string>
+    <string name="txtWind">Wind</string>
+    <string name="txtFeelsLike">Feels Like</string>
+    <string name="txtHumidPercentage">68%</string>
+    <string name="txtHumid">Humidity</string>
 </resources>

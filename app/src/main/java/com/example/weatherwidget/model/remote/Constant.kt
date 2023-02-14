@@ -33,4 +33,6 @@ object Constant {
             0xffce30ff.toInt()
         )
     )
+
+    const val IMG_URL="https://openweathermap.org/img/wn"
 }
