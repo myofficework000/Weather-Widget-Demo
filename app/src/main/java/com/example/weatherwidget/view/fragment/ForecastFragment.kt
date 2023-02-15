@@ -20,7 +20,7 @@ import com.example.weatherwidget.view.adapter.ForecastAdapter
 class ForecastFragment : Fragment(), MVPForecast, MVPForecast.ForecastView {
     private lateinit var binding: FragmentForecastBinding
     private lateinit var forecastPresenter: ForecastPresenter
-    private lateinit var forecastAdapter: ForecastAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +36,15 @@ class ForecastFragment : Fragment(), MVPForecast, MVPForecast.ForecastView {
 
     private fun initForecastPresenter() {
         forecastPresenter = ForecastPresenter(VolleyHandler(context), this)
+        forecastPresenter.getForecast()
     }
 
     override fun onLoad(isLoading: Boolean) {
-
+        if(isLoading){
+            binding.loader.visibility = View.VISIBLE
+        } else {
+            binding.loader.visibility = View.GONE
+        }
     }
 
     override fun showError(message: String) {
@@ -51,10 +56,8 @@ class ForecastFragment : Fragment(), MVPForecast, MVPForecast.ForecastView {
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewForecast.adapter = ForecastAdapter(forecastResponse.list)
 
-        /*Glide.with(this)
-            .load(forecastResponse.message)
-            .error(android.R.drawable.ic_dialog_alert)
-            .placeholder(R.drawable.ic_launcher_background)
-   */
+        binding.txtDegree.text = forecastResponse.list[0].main.feels_like.toString()
+        binding.txtHuimdPercentage.text = forecastResponse.list[0].main.humidity.toString()
+
     }
 }
