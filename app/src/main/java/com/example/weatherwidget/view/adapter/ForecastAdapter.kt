@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.weatherwidget.databinding.ForecastItemBinding
 import com.example.weatherwidget.model.remote.Constant
 import com.example.weatherwidget.model.remote.data_forecast.Forecast
+import kotlin.time.Duration.Companion.days
 
 class ForecastAdapter(private var listOfForecast : List<Forecast>) : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>(){
     private lateinit var binding: ForecastItemBinding
@@ -31,6 +32,8 @@ class ForecastAdapter(private var listOfForecast : List<Forecast>) : RecyclerVie
                 Glide.with(this@ForecastViewHolder.itemView.context)
                     .load("${IMG_URL}/${forecast.weather[0].icon}.png")
                     .into(binding.imgForecast)
+                binding.txtForecastDegree.text = forecast.main.temp.toString()
+
             }
         }
     }

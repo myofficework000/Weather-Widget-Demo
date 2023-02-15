@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/_size80dp"
     android:layout_height="@dimen/_size100dp"
+    style="@style/appCardView"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,6 +31,7 @@
             app:layout_constraintTop_toBottomOf="@id/txtDay" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtForecastDegree"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtDegree"

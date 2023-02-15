@@ -5,6 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".fragment.ForecastFragment">
 
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/appCardView" >
+
+
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/loader"
         android:layout_width="wrap_content"
@@ -96,5 +102,6 @@
         </LinearLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
 
 </FrameLayout>
