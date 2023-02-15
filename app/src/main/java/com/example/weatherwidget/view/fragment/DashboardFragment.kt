@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.weatherwidget.R
 import com.example.weatherwidget.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -16,4 +17,6 @@ class DashboardFragment : Fragment() {
     ): View = FragmentDashboardBinding.inflate(inflater, container, false).apply {
         binding = this
     }.root
+
+
 }
