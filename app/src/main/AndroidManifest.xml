@@ -14,9 +14,6 @@
         android:theme="@style/Theme.WeatherWidget"
         tools:targetApi="31">
         <activity
-            android:name=".ForecastActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.AirPollutionActivity"
             android:exported="false" />
         <activity
