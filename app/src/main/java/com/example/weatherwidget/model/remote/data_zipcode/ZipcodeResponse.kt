@@ -1,9 +1,9 @@
 package com.example.weatherwidget.model.remote.data_zipcode
 
 data class ZipcodeResponse(
-    val country: String,
-    val lat: Double,
-    val lon: Double,
+    val zip: String,
     val name: String,
-    val zip: String
+    val lat: String,
+    val lon: String,
+    val country: String,
 )

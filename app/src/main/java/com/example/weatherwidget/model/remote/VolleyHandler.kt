@@ -4,15 +4,19 @@ import android.content.Context
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.weatherwidget.model.remote.Constant.API_KEY
 import com.example.weatherwidget.model.remote.data_airpollution.AirPollutionResponse
 import com.example.weatherwidget.presenter.mvp_air_pollution.MVPAirPollution
 import com.example.weatherwidget.model.remote.Constant.BASE_URL
 import com.example.weatherwidget.model.remote.Constant.END_POINT_FORECAST
 import com.example.weatherwidget.model.remote.Constant.END_POINT_WEATHER
+import com.example.weatherwidget.model.remote.Constant.END_POINT_ZIPCODE
 import com.example.weatherwidget.model.remote.data_weather.OperationalCallBackWeather
 import com.example.weatherwidget.model.remote.data_weather.WeatherResponse
 import com.example.weatherwidget.model.remote.data_forecast.ForecastResponse
 import com.example.weatherwidget.model.remote.data_forecast.OperationalCallbackForeCast
+import com.example.weatherwidget.model.remote.data_zipcode.OperationalCallbackZipCode
+import com.example.weatherwidget.model.remote.data_zipcode.ZipcodeResponse
 import com.google.gson.Gson
 
 class VolleyHandler(private val context: Context?) {
@@ -51,13 +55,24 @@ class VolleyHandler(private val context: Context?) {
         requestQueue.add(request)
     }
 
-        fun getForecastData() {
-
-        }
-
-        fun getZipCodeData() {
-
-        }
+    fun getZipCodeData(zipCode: String, countryCode: String, callback: OperationalCallbackZipCode) {
+        val request = StringRequest(
+            Request.Method.GET,
+            BASE_URL + END_POINT_ZIPCODE + "?zip=$zipCode,$countryCode&appid=$API_KEY",
+            {
+                try {
+                    val apiResponse = Gson().fromJson(it, ZipcodeResponse::class.java)
+                    callback.onSuccess(apiResponse)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            },
+            {
+                callback.onFailure(it.toString())
+            }
+        )
+        requestQueue.add(request)
+    }
 
         fun getAirPollutionData(
             latitude: Double,
