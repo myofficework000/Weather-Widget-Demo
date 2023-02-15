@@ -12,7 +12,8 @@ object Constant {
     const val END_POINT_WEATHER = "data/2.5/weather?q=Houston&appid=$API_KEY"
     const val END_POINT_FORECAST = "data/2.5/forecast?q=Chicago&appid=$API_KEY"
     const val END_POINT_AIR_POLLUTION = "data/2.5/air_pollution/forecast"
-    const val END_POINT_ZIPCODE = "geo/1.0/zip?zip=81658&appid=$API_KEY"
+    const val END_POINT_ZIPCODE_SAMPLE = "geo/1.0/zip?zip=81658&appid=$API_KEY"
+    const val END_POINT_ZIPCODE = "geo/1.0/zip"
 
     // first: Latitude, second: Longitude
     // Also this is Long Beach of Los Angeles.
@@ -35,4 +36,21 @@ object Constant {
     )
 
     const val IMG_URL="https://openweathermap.org/img/wn"
+
+    val COUNTRY_CODE = arrayOf("US", "IN", "GB", "RU")
+
+    const val DATABASE_NAME = "weather-db"
+    const val DATABASE_VERSION = 1
+    const val CITY_TABLE_NAME = "tbCity"
+    const val ID_COL = "id"
+    const val ZIP_COL = "zip"
+    const val CITY_COL = "city"
+    const val LAT_COL = "lat"
+    const val LON_COL = "lon"
+    const val COUNTRY_COL = "country"
+
+    const val SHARED_PREF_FILE = "WeatherAppPreference"
+    const val SHARED_PREF_CITY_KEY = "city-name"
+
+
 }

@@ -5,7 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
-
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#D86868"
+        android:text="Add city"
+        android:layout_margin="@dimen/_10dp"
+        android:textColor="@color/white"
+        app:iconTint="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:icon="@drawable/baseline_add_24"
+        android:id="@+id/btnShowBottom"
+        />
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/dashboardFragment"
         android:name="com.example.weatherwidget.fragment.DashboardFragment"
