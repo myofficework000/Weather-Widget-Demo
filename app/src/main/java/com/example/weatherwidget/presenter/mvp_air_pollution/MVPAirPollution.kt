@@ -1,6 +1,8 @@
 package com.example.weatherwidget.presenter.mvp_air_pollution
 
+import com.example.weatherwidget.model.remote.Constant
 import com.example.weatherwidget.model.remote.data_airpollution.AirPollutionResponse
+import com.example.weatherwidget.model.remote.data_airpollution.PollutionData
 
 interface MVPAirPollution {
 
@@ -10,7 +12,10 @@ interface MVPAirPollution {
     }
     interface IPresenter{
         fun getAirPollutionData(latitude: Double, longitude: Double)
-        fun getAirPollutionSummaryText(daqi: Int): String
+        fun getAirPollutionSummaryText(level: Int): String
+        fun getAirPollutionDataFraction(
+            dataType: Constant.AirPollutionDataType,
+            value: PollutionData?): Double
     }
     interface IView{
         fun onSuccess(data: AirPollutionResponse?)
