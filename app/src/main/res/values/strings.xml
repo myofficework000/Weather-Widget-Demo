@@ -14,4 +14,10 @@
     <string name="txtFeelsLike">Feels Like</string>
     <string name="txtHumidPercentage">68%</string>
     <string name="txtHumid">Humidity</string>
+    <string name="cityName">City</string>
+    <string name="day">Day</string>
+    <string name="date">Day, Month, Year</string>
+    <string name="temperature">00</string>
+    <string name="weatherDescription">Weather Description</string>
+    <string name="minTemperature">00</string>
 </resources>
