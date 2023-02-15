@@ -6,7 +6,12 @@
     <string name="negative_button_1">Got it</string>
     <string name="api_no_data_text">(Data unavailable)</string>
     <string name="airPollutionLabel1">Air Quality</string>
-    <string name="airPollutionLabel2">DAQI (GB)</string>
+    <string name="airPollutionCaqi">CAQI value</string>
+    <string name="airPollutionNo2">Nitrogen Dioxide (NO2)</string>
+    <string name="airPollutionO3">Ozone (O3)</string>
+    <string name="airPollutionPm2_5">&lt; 2.5μm Inhalable Particles (PM2.5)</string>
+    <string name="airPollutionPm10">&lt; 10μm Inhalable Particles (PM10)</string>
+    <string name="airPollutionUgm3">µg/m^3</string>
     <string name="airPollutionSummaryText">(Loading...)</string>
     <string name="txtDegree">18°</string>
     <string name="txtWindSpeed">11MPH</string>
@@ -20,4 +25,8 @@
     <string name="temperature">00</string>
     <string name="weatherDescription">Weather Description</string>
     <string name="minTemperature">00</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="airPollutionSelectDataTypeLabel">Other pollutants</string>
+    <string name="airPollutionShowHistoryLabel">See history</string>
 </resources>

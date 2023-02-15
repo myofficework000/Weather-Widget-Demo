@@ -1,6 +1,5 @@
 package com.example.weatherwidget.model.remote
 
-import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 
 /*
@@ -22,16 +21,11 @@ object Constant {
     val AIRPOLLUTIONBARGRADIENT = GradientDrawable(
         GradientDrawable.Orientation.LEFT_RIGHT,
         intArrayOf(
-            0xff9cff9c.toInt(),
-            0xff31ff00.toInt(),
-            0xff31cf00.toInt(),
-            0xffffff00.toInt(),
-            0xffffcf00.toInt(),
-            0xffff9a00.toInt(),
-            0xffff6464.toInt(),
-            0xffff0000.toInt(),
-            0xff990000.toInt(),
-            0xffce30ff.toInt()
+            0xff60fe00.toInt(),
+            0xffb9ff00.toInt(),
+            0xfffeff80.toInt(),
+            0xfffca754.toInt(),
+            0xfffe0707.toInt()
         )
     )
 
@@ -53,4 +47,15 @@ object Constant {
     const val SHARED_PREF_CITY_KEY = "city-name"
 
 
+    enum class AirPollutionDataType {
+        CAQI,
+        CO,
+        NO,
+        NO2,
+        O3,
+        SO2,
+        PM2_5,
+        PM10,
+        NH3
+    }
 }
