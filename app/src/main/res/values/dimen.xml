@@ -7,6 +7,7 @@
     <dimen name="_size10dp">10dp</dimen>
     <dimen name="_20dp">20dp</dimen>
     <dimen name="_25dp">25dp</dimen>
-
+    <dimen name="_30dp">30dp</dimen>
     <dimen name="title_medium">24sp</dimen>
+    <dimen name="_0dp">0dp</dimen>
 </resources>
