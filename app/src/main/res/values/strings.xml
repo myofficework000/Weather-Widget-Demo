@@ -29,4 +29,6 @@
     <string name="airPollutionSelectDataTypeLabel">Other pollutants</string>
     <string name="airPollutionShowHistoryLabel">See history</string>
     <string name="celsius">℃</string>
+    
+    <string name="fragmentTagAirPollution">airPollutionFragment</string>
 </resources>

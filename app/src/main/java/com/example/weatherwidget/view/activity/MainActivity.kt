@@ -1,21 +1,23 @@
 package com.example.weatherwidget.view
 
-import android.R
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.example.weatherwidget.R
 import com.example.weatherwidget.database.DatabaseHelper
 import com.example.weatherwidget.database.WeatherCityDao
 import com.example.weatherwidget.databinding.ActivityMainBinding
 import com.example.weatherwidget.databinding.AddCityWidgetBinding
+import com.example.weatherwidget.fragment.DashboardFragment
 import com.example.weatherwidget.model.remote.Constant
 import com.example.weatherwidget.model.remote.VolleyHandler
 import com.example.weatherwidget.model.remote.data_zipcode.ZipcodeResponse
 import com.example.weatherwidget.presenter.mvp_zipcode.MVPZipCode
 import com.example.weatherwidget.presenter.mvp_zipcode.ZipcodePresenter
+import com.example.weatherwidget.view.fragment.AirPollutionFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
@@ -28,6 +30,9 @@ class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
     private lateinit var weatherCityDao: WeatherCityDao
     private lateinit var sharedPreferences: SharedPreferences
 
+    private val dashboardFragment by lazy {
+        binding.dashboardFragment.getFragment<DashboardFragment>()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +79,7 @@ class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
                 addCityInfo(zipcodeResponse)
             }
         }
-        val spinnerAdapter = ArrayAdapter(this, R.layout.simple_list_item_1, Constant.COUNTRY_CODE)
+        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, Constant.COUNTRY_CODE)
         bindingCityWidget.spinnerCountry.adapter = spinnerAdapter
         val sharedCityValue = sharedPreferences.getString(Constant.SHARED_PREF_CITY_KEY,"")
         bindingCityWidget.inputCity.setText(sharedCityValue)
@@ -98,9 +103,15 @@ class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
         weatherCityDao.addCity(zipcodeResponse)
         val editor:SharedPreferences.Editor =  sharedPreferences.edit()
         editor.putString(Constant.SHARED_PREF_CITY_KEY,zipcodeResponse.name)
+        editor.putString(Constant.SHARED_PREF_CITY_LAT,zipcodeResponse.lat)
+        editor.putString(Constant.SHARED_PREF_CITY_LON,zipcodeResponse.lon)
         editor.apply()
         editor.commit()
         Toast.makeText(this@MainActivity, "City added!", Toast.LENGTH_SHORT).show()
+
+        dashboardFragment.airPollutionFragment.updateLocation(
+            zipcodeResponse.lat.toDouble(),
+            zipcodeResponse.lon.toDouble())
     }
 
 }
