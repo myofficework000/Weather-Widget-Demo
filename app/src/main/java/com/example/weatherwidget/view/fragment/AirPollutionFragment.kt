@@ -1,6 +1,7 @@
 package com.example.weatherwidget.view.fragment
 
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,6 +23,9 @@ class AirPollutionFragment : Fragment(), MVPAirPollution.IView {
     private val presenter by lazy {
         AirPollutionPresenter(this, VolleyHandler(requireContext()))
     }
+    private val sharedPreferences by lazy {
+        requireContext().getSharedPreferences(Constant.SHARED_PREF_FILE, Context.MODE_PRIVATE)
+    }
     private var selectedDataType = Constant.AirPollutionDataType.CAQI
     private var pollutionData: List<PollutionData>? = null
     private var mostRecentPollutionData: PollutionData? = null
@@ -32,10 +36,8 @@ class AirPollutionFragment : Fragment(), MVPAirPollution.IView {
     ): View = FragmentAirPollutionBinding.inflate(inflater, container, false).apply {
         binding = this
         airPollutionSummaryBarBackground.background = Constant.AIRPOLLUTIONBARGRADIENT
-        presenter.getAirPollutionData(
-            Constant.PLACEHOLDER_COORDS.first,
-            Constant.PLACEHOLDER_COORDS.second
-        )
+
+        initializeLocation()
         airPollutionSelectDataTypeButton.setOnClickListener {
             AirPollutionTypeSelectionSheet(selectedDataType) {
                 when (it) {
@@ -66,6 +68,19 @@ class AirPollutionFragment : Fragment(), MVPAirPollution.IView {
             .setNegativeButton(getString(R.string.negative_button_1)) { _, _->}
             .show()
     }
+
+    private fun initializeLocation() {
+        val lat = sharedPreferences.getString(Constant.SHARED_PREF_CITY_LAT, "")?: ""
+        val lon = sharedPreferences.getString(Constant.SHARED_PREF_CITY_LON, "")?: ""
+        if (lat.isNotEmpty() && lon.isNotEmpty()) {
+            updateLocation(lat.toDouble(), lon.toDouble())
+        } else {
+            updateLocation(Constant.PLACEHOLDER_COORDS.first,Constant.PLACEHOLDER_COORDS.second)
+        }
+    }
+
+    fun updateLocation(latitude: Double, longitude: Double) =
+        presenter.getAirPollutionData(latitude,longitude)
 
     private fun updateSummary(dataType: Constant.AirPollutionDataType) {
         pollutionData?.let {
