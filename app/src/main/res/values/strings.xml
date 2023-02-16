@@ -25,8 +25,8 @@
     <string name="temperature">00</string>
     <string name="weatherDescription">Weather Description</string>
     <string name="minTemperature">00</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="airPollutionSelectDataTypeLabel">Other pollutants</string>
     <string name="airPollutionShowHistoryLabel">See history</string>
+    <string name="celsius">℃</string>
 </resources>

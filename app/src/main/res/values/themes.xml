@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="appCardView" parent="CardView">
+    <style name="appCardView" parent="Widget.MaterialComponents.CardView">
         <item name="android:layout_margin">@dimen/_10dp</item>
         <item name="cardCornerRadius">@dimen/_10dp</item>
         <item name="cardElevation">@dimen/_10dp</item>
