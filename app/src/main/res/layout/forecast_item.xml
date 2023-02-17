@@ -3,45 +3,46 @@
     android:layout_width="@dimen/_size80dp"
     android:layout_height="@dimen/_size100dp"
     style="@style/appCardView"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/forecast_color"
+    app:cardElevation="@dimen/_5dp" >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/_size10dp">
+        android:orientation="vertical"
+        android:weightSum="3">
 
         <TextView
             android:id="@+id/txtDay"
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Wednesday"
-            android:textSize="@dimen/_size10dp"
+            android:text="Wed"
+            android:textStyle="bold"
+            android:textSize="@dimen/_14sp"
             android:gravity="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:textColor="@color/primary_text_color" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgForecast"
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/baseline_cloud_queue_24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtDay" />
+            android:src="@drawable/baseline_cloud_queue_24" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtForecastDegree"
+            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/txtDegree"
+            android:textSize="@dimen/_size16sp"
+            android:textStyle="bold"
             android:gravity="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgForecast"
-            />
+            android:textColor="@color/primary_text_color" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

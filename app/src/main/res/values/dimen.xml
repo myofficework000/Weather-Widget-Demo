@@ -10,4 +10,7 @@
     <dimen name="_30dp">30dp</dimen>
     <dimen name="title_medium">24sp</dimen>
     <dimen name="_0dp">0dp</dimen>
+    <dimen name="_12sp">12sp</dimen>
+    <dimen name="_14sp">14sp</dimen>
+    <dimen name="_size16sp">16sp</dimen>
 </resources>

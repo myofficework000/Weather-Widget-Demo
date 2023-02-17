@@ -10,4 +10,6 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="primary_text_color">#FFFFFF</color>
     <color name="secondary_text_color">#FF000000</color>
+    <color name="forecast_color">#83FFC107</color>
+    <color name="forecast_card_color">#52FFC107</color>
 </resources>

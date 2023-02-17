@@ -11,16 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.weatherwidget.R
 import com.example.weatherwidget.databinding.FragmentForecastBinding
+import com.example.weatherwidget.model.remote.Constant.ABSOLUTE_ZERO
 import com.example.weatherwidget.model.remote.VolleyHandler
 import com.example.weatherwidget.model.remote.data_forecast.ForecastResponse
 import com.example.weatherwidget.presenter.mvp_forecast.ForecastPresenter
 import com.example.weatherwidget.presenter.mvp_forecast.MVPForecast
 import com.example.weatherwidget.view.adapter.ForecastAdapter
+import kotlin.math.nextDown
 
 class ForecastFragment : Fragment(), MVPForecast, MVPForecast.ForecastView {
     private lateinit var binding: FragmentForecastBinding
     private lateinit var forecastPresenter: ForecastPresenter
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,8 +57,12 @@ class ForecastFragment : Fragment(), MVPForecast, MVPForecast.ForecastView {
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewForecast.adapter = ForecastAdapter(forecastResponse.list)
 
-        binding.txtDegree.text = forecastResponse.list[0].main.feels_like.toString()
+        binding.txtDegree.text = Math.round(forecastResponse.list[0].main.feels_like-ABSOLUTE_ZERO).toString() + "°C"
         binding.txtHuimdPercentage.text = forecastResponse.list[0].main.humidity.toString()
+        binding.txtWind.text = forecastResponse.city.name
+        binding.txtmin.text = Math.round(forecastResponse.list[0].main.temp_min-ABSOLUTE_ZERO).toString() + "° Min"
+        binding.txtmax.text = Math.round(forecastResponse.list[0].main.temp_max-ABSOLUTE_ZERO).toString() + "° Max"
+
 
     }
 }
