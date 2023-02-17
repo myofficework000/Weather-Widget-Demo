@@ -14,6 +14,7 @@ object Constant {
     const val END_POINT_AIR_POLLUTION = "data/2.5/air_pollution/forecast"
     const val END_POINT_ZIPCODE_SAMPLE = "geo/1.0/zip?zip=81658&appid=$API_KEY"
     const val END_POINT_ZIPCODE = "geo/1.0/zip"
+    const val END_POINT_CITY_VALIDATE = "data/2.5/weather"
 
     // first: Latitude, second: Longitude
     // Also this is Long Beach of Los Angeles.

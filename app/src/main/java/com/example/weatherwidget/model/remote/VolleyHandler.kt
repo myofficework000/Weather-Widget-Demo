@@ -8,6 +8,7 @@ import com.example.weatherwidget.model.remote.Constant.API_KEY
 import com.example.weatherwidget.model.remote.data_airpollution.AirPollutionResponse
 import com.example.weatherwidget.presenter.mvp_air_pollution.MVPAirPollution
 import com.example.weatherwidget.model.remote.Constant.BASE_URL
+import com.example.weatherwidget.model.remote.Constant.END_POINT_CITY_VALIDATE
 import com.example.weatherwidget.model.remote.Constant.END_POINT_FORECAST
 import com.example.weatherwidget.model.remote.Constant.END_POINT_WEATHER
 import com.example.weatherwidget.model.remote.Constant.END_POINT_ZIPCODE
@@ -15,6 +16,8 @@ import com.example.weatherwidget.model.remote.data_weather.OperationalCallBackWe
 import com.example.weatherwidget.model.remote.data_weather.WeatherResponse
 import com.example.weatherwidget.model.remote.data_forecast.ForecastResponse
 import com.example.weatherwidget.model.remote.data_forecast.OperationalCallbackForeCast
+import com.example.weatherwidget.model.remote.data_zipcode.CityValidateResponse
+import com.example.weatherwidget.model.remote.data_zipcode.OperationalCallbackCityValidate
 import com.example.weatherwidget.model.remote.data_zipcode.OperationalCallbackZipCode
 import com.example.weatherwidget.model.remote.data_zipcode.ZipcodeResponse
 import com.google.gson.Gson
@@ -62,6 +65,25 @@ class VolleyHandler(private val context: Context?) {
             {
                 try {
                     val apiResponse = Gson().fromJson(it, ZipcodeResponse::class.java)
+                    callback.onSuccess(apiResponse)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            },
+            {
+                callback.onFailure(it.toString())
+            }
+        )
+        requestQueue.add(request)
+    }
+
+    fun getCityValidateData(city: String, callback: OperationalCallbackCityValidate) {
+        val request = StringRequest(
+            Request.Method.GET,
+            BASE_URL + END_POINT_CITY_VALIDATE + "?q=$city&appid=$API_KEY",
+            {
+                try {
+                    val apiResponse = Gson().fromJson(it, CityValidateResponse::class.java)
                     callback.onSuccess(apiResponse)
                 } catch (e: Exception) {
                     e.printStackTrace()
