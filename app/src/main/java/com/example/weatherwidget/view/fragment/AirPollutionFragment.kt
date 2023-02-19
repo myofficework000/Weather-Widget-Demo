@@ -62,11 +62,15 @@ class AirPollutionFragment : Fragment(), MVPAirPollution.IView {
     }
 
     override fun onError(message: String?) {
-        AlertDialog.Builder(requireContext())
-            .setTitle(getString(R.string.api_error_title))
-            .setMessage(getString(R.string.api_error_message))
-            .setNegativeButton(getString(R.string.negative_button_1)) { _, _->}
-            .show()
+        try {
+            AlertDialog.Builder(requireContext())
+                .setTitle(getString(R.string.api_error_title))
+                .setMessage(getString(R.string.api_error_message))
+                .setNegativeButton(getString(R.string.negative_button_1)) { _, _->}
+                .show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private fun initializeLocation() {
