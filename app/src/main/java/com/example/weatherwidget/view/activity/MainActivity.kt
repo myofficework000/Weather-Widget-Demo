@@ -1,14 +1,13 @@
 package com.example.weatherwidget.view
 
-import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.weatherwidget.R
 import com.example.weatherwidget.database.DatabaseHelper
 import com.example.weatherwidget.database.WeatherCityDao
@@ -21,7 +20,6 @@ import com.example.weatherwidget.model.remote.data_zipcode.CityValidateResponse
 import com.example.weatherwidget.model.remote.data_zipcode.ZipcodeResponse
 import com.example.weatherwidget.presenter.mvp_zipcode.MVPZipCode
 import com.example.weatherwidget.presenter.mvp_zipcode.ZipcodePresenter
-import com.example.weatherwidget.view.fragment.AirPollutionFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
@@ -58,7 +56,11 @@ class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
     }
 
     private fun initSharedPreference() {
-        sharedPreferences = this.getSharedPreferences(Constant.SHARED_PREF_FILE, Context.MODE_PRIVATE)
+        sharedPreferences =
+            this.getSharedPreferences(Constant.SHARED_PREF_FILE, Context.MODE_PRIVATE)
+        checkThemeAndSetTheme(
+            sharedPreferences.getLong(Constant.SHARED_PREF_CITY_SUNSET, 990909),
+            sharedPreferences.getLong(Constant.SHARED_PREF_CITY_TIME_NOW, 990909))
     }
 
     private fun initDatabase() {
@@ -70,33 +72,34 @@ class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
         zipcodePresenter = ZipcodePresenter(VolleyHandler(this), this)
     }
 
-    fun Context.hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-    }
-
     private fun closeKeyboard(view: View) {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         imm?.hideSoftInputFromWindow(view.windowToken, 0)
     }
+
     private fun initBottomCityWidgetDlg() {
         bottomCityWidgetDlg = BottomSheetDialog(this)
         bindingCityWidget = AddCityWidgetBinding.inflate(layoutInflater)
         bottomCityWidgetDlg.setContentView(bindingCityWidget.root)
         bindingCityWidget.btnGetCity.setOnClickListener {
             closeKeyboard(bindingCityWidget.inputZipCode)
-            zipcodePresenter.getZipcodeData(bindingCityWidget.inputZipCode.text.toString(), bindingCityWidget.spinnerCountry.selectedItem.toString())
+            zipcodePresenter.getZipcodeData(
+                bindingCityWidget.inputZipCode.text.toString(),
+                bindingCityWidget.spinnerCountry.selectedItem.toString()
+            )
 
         }
         bindingCityWidget.btnAddCity.setOnClickListener {
             closeKeyboard(bindingCityWidget.inputCity)
             bindingCityWidget.apply {
+                bindingCityWidget.cityLabel.error = null
                 zipcodePresenter.getCityValidateData(bindingCityWidget.inputCity.text.toString())
             }
         }
-        val spinnerAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, Constant.COUNTRY_CODE)
+        val spinnerAdapter =
+            ArrayAdapter(this, android.R.layout.simple_list_item_1, Constant.COUNTRY_CODE)
         bindingCityWidget.spinnerCountry.adapter = spinnerAdapter
-        val sharedCityValue = sharedPreferences.getString(Constant.SHARED_PREF_CITY_KEY,"")
+        val sharedCityValue = sharedPreferences.getString(Constant.SHARED_PREF_CITY_KEY, "")
         bindingCityWidget.inputCity.setText(sharedCityValue)
     }
 
@@ -105,8 +108,8 @@ class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
     }
 
     override fun showError(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         bindingCityWidget.inputCity.setText("")
+        bindingCityWidget.cityLabel.error = getString(R.string.invalid_city)
     }
 
     override fun setResult(zipcodeResponse: ZipcodeResponse) {
@@ -116,7 +119,7 @@ class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
 
     override fun setCityValidateResult(cityValidateResponse: CityValidateResponse) {
         bindingCityWidget.inputCity.setText(cityValidateResponse.name)
-        if(cityValidateResponse.cod == "200") {
+        if (cityValidateResponse.cod == "200") {
             val zipcodeResponse = ZipcodeResponse(
                 "",
                 cityValidateResponse.name,
@@ -124,25 +127,57 @@ class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
                 cityValidateResponse.coord.lon,
                 cityValidateResponse.sys.country
             )
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.putLong(
+                Constant.SHARED_PREF_CITY_SUNSET,
+                cityValidateResponse.sys.sunset.toLong()
+            )
+            editor.putLong(
+                Constant.SHARED_PREF_CITY_TIME_NOW,
+                cityValidateResponse.dt.toLong()
+            )
+            editor.apply()
+            checkThemeAndSetTheme(
+                cityValidateResponse.sys.sunset.toLong(),
+                cityValidateResponse.dt.toLong()
+            )
             addCityInfo(zipcodeResponse)
         } else {
-            Toast.makeText(this@MainActivity, cityValidateResponse.message.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this@MainActivity,
+                cityValidateResponse.message.toString(),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun checkThemeAndSetTheme(timeSunset: Long, timeNow: Long) {
+        if (timeSunset > timeNow) {
+            // it means it is day
+            binding.containerMain.setBackgroundResource(R.drawable.theme_day)
+        } else {
+            // it is night
+            binding.containerMain.setBackgroundResource(R.drawable.theme_night)
         }
     }
 
     fun addCityInfo(zipcodeResponse: ZipcodeResponse) {
         weatherCityDao.addCity(zipcodeResponse)
-        val editor:SharedPreferences.Editor =  sharedPreferences.edit()
-        editor.putString(Constant.SHARED_PREF_CITY_KEY,zipcodeResponse.name)
-        editor.putString(Constant.SHARED_PREF_CITY_LAT,zipcodeResponse.lat)
-        editor.putString(Constant.SHARED_PREF_CITY_LON,zipcodeResponse.lon)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putString(Constant.SHARED_PREF_CITY_KEY, zipcodeResponse.name)
+        editor.putString(Constant.SHARED_PREF_CITY_LAT, zipcodeResponse.lat)
+        editor.putString(Constant.SHARED_PREF_CITY_LON, zipcodeResponse.lon)
         editor.apply()
         editor.commit()
         Toast.makeText(this@MainActivity, "City added!", Toast.LENGTH_SHORT).show()
 
         dashboardFragment.airPollutionFragment.updateLocation(
             zipcodeResponse.lat.toDouble(),
-            zipcodeResponse.lon.toDouble())
-    }
+            zipcodeResponse.lon.toDouble()
+        )
 
+        dashboardFragment.weatherFragment.updateLocation(
+            zipcodeResponse.name
+        )
+    }
 }

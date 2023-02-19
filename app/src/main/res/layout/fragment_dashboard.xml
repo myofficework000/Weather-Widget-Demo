@@ -12,7 +12,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/weatherFragmentView"
-            android:name="com.example.weatherwidget.fragment.WeatherFragment"
+            android:name="com.example.weatherwidget.view.fragment.WeatherFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_weather" />

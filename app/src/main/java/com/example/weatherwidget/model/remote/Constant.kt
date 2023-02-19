@@ -49,6 +49,8 @@ object Constant {
     const val SHARED_PREF_CITY_KEY = "city-name"
     const val SHARED_PREF_CITY_LAT = "city-lat"
     const val SHARED_PREF_CITY_LON = "city-lon"
+    const val SHARED_PREF_CITY_SUNSET = "sunset"
+    const val SHARED_PREF_CITY_TIME_NOW = "time-now"
 
 
     enum class AirPollutionDataType {

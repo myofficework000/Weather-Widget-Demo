@@ -8,11 +8,15 @@ import android.view.ViewGroup
 import com.example.weatherwidget.R
 import com.example.weatherwidget.databinding.FragmentDashboardBinding
 import com.example.weatherwidget.view.fragment.AirPollutionFragment
+import com.example.weatherwidget.view.fragment.WeatherFragment
 
 class DashboardFragment : Fragment() {
     private lateinit var binding: FragmentDashboardBinding
     val airPollutionFragment by lazy{
         binding.airPollutionFragmentView.getFragment<AirPollutionFragment>()
+    }
+    val weatherFragment by lazy{
+        binding.weatherFragmentView.getFragment<WeatherFragment>()
     }
 
     override fun onCreateView(

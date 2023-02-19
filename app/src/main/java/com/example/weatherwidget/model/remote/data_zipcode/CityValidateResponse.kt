@@ -12,7 +12,7 @@ data class CityValidateResponse(
     val sys: Sys,
     val timezone: String,
     val visibility: String,
-    val weather: List<Weather>,
+    val weather: ArrayList<Weather>,
     val wind: Wind,
     val message: String
 )

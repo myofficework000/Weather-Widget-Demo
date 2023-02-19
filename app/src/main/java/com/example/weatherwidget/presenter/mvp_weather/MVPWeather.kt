@@ -4,7 +4,7 @@ import com.example.weatherwidget.model.remote.data_weather.WeatherResponse
 
 interface MVPWeather {
     interface WeatherPresenter{
-        fun getWeatherData()
+        fun getWeatherData(city: String)
     }
     interface WeatherView{
         fun setResult(weatherResponse: WeatherResponse)

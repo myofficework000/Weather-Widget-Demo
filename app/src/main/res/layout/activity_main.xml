@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.MainActivity"
+    android:id="@+id/containerMain"
     android:background="@drawable/so_hot">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -48,6 +49,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_0dp"
+        android:id="@+id/container"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         >

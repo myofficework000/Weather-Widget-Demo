@@ -32,4 +32,6 @@
     
     <string name="fragmentTagAirPollution">airPollutionFragment</string>
     <string name="loading">Loading...</string>
+    <string name="invalid_city">Please enter a valid city name</string>
+    <string name="default_city">London</string>
 </resources>

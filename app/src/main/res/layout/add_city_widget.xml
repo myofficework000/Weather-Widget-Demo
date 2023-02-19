@@ -18,6 +18,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_weight="1"
             android:layout_width="0dp"
+            app:errorEnabled="true"
+            android:id="@+id/cityLabel"
             android:layout_height="wrap_content"
             android:hint="Enter city name">
 

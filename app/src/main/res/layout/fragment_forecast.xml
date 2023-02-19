@@ -1,147 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.ForecastFragment"
-    android:layout_margin="@dimen/_5dp">
+    tools:context=".fragment.ForecastFragment">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         style="@style/appCardView"
-        app:cardElevation="@dimen/_5dp"
-        app:cardUseCompatPadding="true"
-        app:cardBackgroundColor="@color/forecast_card_color">
-
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/loader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        app:cardBackgroundColor="@color/forecast_card_color"
+        app:cardElevation="@dimen/_5dp"
+        app:cardUseCompatPadding="true">
 
-        <LinearLayout
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/loader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_size10dp"
-            android:layout_weight="1">
+            android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewForecast"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                tools:itemCount="5"
-                tools:listitem="@layout/forecast_item" />
-        </LinearLayout>
+                android:layout_margin="@dimen/_size10dp"
+                android:layout_weight="1">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/_size10dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtWindSpeed"
-                    android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewForecast"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/txtWindSpeed"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_text_color"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtWind"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txtWind"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_text_color"/>
+                    android:orientation="horizontal"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/forecast_item" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_margin="@dimen/_size10dp"
+                android:layout_weight="1">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtDegree"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/txtDegree"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_text_color"/>
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtFeelsLike"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtWindSpeed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtWindSpeed"
+                        android:textColor="@color/primary_text_color"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtWind"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtWind"
+                        android:textColor="@color/primary_text_color"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/txtFeelsLike"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_text_color"/>
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtDegree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtDegree"
+                        android:textColor="@color/primary_text_color"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtFeelsLike"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtFeelsLike"
+                        android:textColor="@color/primary_text_color"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtmin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtDegree"
+                        android:textColor="@color/primary_text_color"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtmax"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtDegree"
+                        android:textColor="@color/primary_text_color"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtHuimdPercentage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtHumidPercentage"
+                        android:textColor="@color/primary_text_color"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtHumid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/txtHumid"
+                        android:textColor="@color/primary_text_color"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtmin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txtDegree"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_text_color"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtmax"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txtDegree"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_text_color"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtHuimdPercentage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txtHumidPercentage"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_text_color"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtHumid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txtHumid"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_text_color"/>
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.cardview.widget.CardView>
-
 </FrameLayout>
