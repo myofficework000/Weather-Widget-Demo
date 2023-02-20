@@ -10,22 +10,26 @@
         style="@style/appCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/forecast_card_color"
-        app:contentPadding="@dimen/_20dp">
+        app:cardBackgroundColor="@color/transparent"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_10dp"
             android:clickable="false"
+            android:padding="@dimen/_5dp"
+            android:layout_margin="@dimen/_5dp"
+            android:background="@drawable/curstom_bg_3"
             android:longClickable="false">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/airPollutionSummaryBarLayout"
                 android:layout_width="match_parent"
-                android:layout_height="24dp"
+                android:layout_height="@dimen/_20dp"
+                android:elevation="@dimen/_10dp"
+                android:layout_margin="@dimen/_10dp"
                 app:cardBackgroundColor="@color/transparent"
-                app:cardCornerRadius="12dp"
+                app:cardCornerRadius="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/airPollutionSummaryText">
@@ -55,6 +59,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/airPollutionLabel1"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-black"
+                android:textSize="@dimen/_size22sp"
                 android:textColor="?colorOnSecondary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -64,6 +71,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/airPollutionCaqi"
+                android:textStyle="bold"
+                android:textSize="17sp"
                 android:textColor="?colorOnSecondary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -74,18 +83,23 @@
                 android:layout_height="wrap_content"
                 android:text="@string/airPollutionSummaryText"
                 android:textColor="?colorOnSecondary"
-                android:textSize="32sp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/airPollutionSummaryTitle" />
 
-            <com.google.android.material.button.MaterialButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/airPollutionSelectDataTypeButton"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:minHeight="@dimen/_20dp"
+                android:layout_height="20dp"
                 android:text="@string/airPollutionSelectDataTypeLabel"
                 android:textAllCaps="false"
+                android:textSize="12sp"
+                android:elevation="@dimen/_10dp"
+                android:paddingStart="@dimen/_5dp"
+                android:paddingEnd="@dimen/_5dp"
+                android:layout_margin="@dimen/_10dp"
+                android:background="@drawable/custom_bg_2"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/airPollutionSummaryBarLayout" />

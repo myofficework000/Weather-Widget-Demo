@@ -2,66 +2,69 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/containerMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity"
-    android:id="@+id/containerMain"
-    android:background="@drawable/so_hot">
+    android:background="@drawable/so_hot"
+    tools:context=".view.MainActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_700"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        android:background="@drawable/curstom_bg_3"
+        app:layout_constraintTop_toTopOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            >
+            android:layout_margin="5dp">
+
             <TextView
                 android:id="@+id/txtToolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-thin"
                 android:text="@string/app_name"
-                android:textSize="25sp"
                 android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="parent"
+                android:textStyle="bold"
+                android:textSize="@dimen/_size22sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
+
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#D86868"
-                android:text="Add city"
-                android:layout_margin="@dimen/_10dp"
-                android:textColor="@color/white"
-                app:iconTint="@color/white"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:icon="@drawable/baseline_add_24"
                 android:id="@+id/btnShowBottom"
-                />
+                android:padding="@dimen/_5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20dp"
+                android:layout_margin="@dimen/_5dp"
+                android:backgroundTint="@color/white"
+                android:text="Add city"
+                android:textColor="#006064"
+                app:icon="@drawable/baseline_add_24"
+                app:iconTint="#006064"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_0dp"
-        android:id="@+id/container"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/dashboardFragment"
             android:name="com.example.weatherwidget.view.fragment.DashboardFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:layout="@layout/fragment_dashboard"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/fragment_dashboard" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WeatherWidget</string>
+    <string name="app_name">Weather Widget</string>
     <string name="unknown_error_message">Unknown Error</string>
     <string name="api_error_message">There is an error when pulling data from the server. Either the server is down or your phone has trouble connecting to it.</string>
     <string name="api_error_title">Network Error</string>
@@ -26,7 +26,7 @@
     <string name="weatherDescription">Weather Description</string>
     <string name="minTemperature">00</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="airPollutionSelectDataTypeLabel">Other pollutants</string>
+    <string name="airPollutionSelectDataTypeLabel">Want to check Other pollutants?</string>
     <string name="airPollutionShowHistoryLabel">See history</string>
     <string name="celsius">℃</string>
     
@@ -34,4 +34,7 @@
     <string name="loading">Loading...</string>
     <string name="invalid_city">Please enter a valid city name</string>
     <string name="default_city">London</string>
+    <string name="add_city">Add city</string>
+    <string name="get_city">Get city</string>
+    <string name="enter_zipcode">Enter zipcode</string>
 </resources>

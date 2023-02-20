@@ -34,7 +34,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10dp"
-            android:text="Add City"
+            android:text="@string/add_city"
+            android:textAllCaps="false"
+            android:background="@drawable/custom_bg_2"
             style="@style/Widget.AppCompat.Button.Colored"
             />
     </LinearLayout>
@@ -54,7 +56,7 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Enter zipcode">
+            android:hint="@string/enter_zipcode">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputZipCode"
@@ -74,10 +76,13 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnGetCity"
+            android:fontFamily="sans-serif-condensed"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/custom_bg_2"
             style="@style/Widget.AppCompat.Button.Colored"
-            android:text="Get City"
+            android:text="@string/get_city"
             />
     </LinearLayout>
 
