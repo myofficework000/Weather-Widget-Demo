@@ -6,13 +6,12 @@ import com.example.weatherwidget.model.remote.data_forecast.OperationalCallbackF
 
 class ForecastPresenter (
     private val volleyHandler: VolleyHandler,
-    private val forecastView: MVPForecast.ForecastView
-        ): MVPForecast.ForecastPresenter{
+    private val forecastView: MVPForecast.ForecastView)
+    : MVPForecast.ForecastPresenter{
 
-    override fun getForecast() {
+    override fun getForecast(city: String) {
         forecastView.onLoad(true)
-
-        volleyHandler.getForecastData(object :OperationalCallbackForeCast{
+        volleyHandler.getForecastData(city, object :OperationalCallbackForeCast{
             override fun onSuccess(forecastResponse: ForecastResponse) {
                 forecastView.onLoad(false)
                 forecastView.setResult(forecastResponse)

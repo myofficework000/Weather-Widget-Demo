@@ -1,6 +1,7 @@
 package com.example.weatherwidget.fragment
 
-import android.graphics.drawable.GradientDrawable.Orientation
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,20 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.example.weatherwidget.R
 import com.example.weatherwidget.databinding.FragmentForecastBinding
+import com.example.weatherwidget.model.remote.Constant
 import com.example.weatherwidget.model.remote.Constant.ABSOLUTE_ZERO
 import com.example.weatherwidget.model.remote.VolleyHandler
 import com.example.weatherwidget.model.remote.data_forecast.ForecastResponse
 import com.example.weatherwidget.presenter.mvp_forecast.ForecastPresenter
 import com.example.weatherwidget.presenter.mvp_forecast.MVPForecast
 import com.example.weatherwidget.view.adapter.ForecastAdapter
-import kotlin.math.nextDown
+import kotlin.math.roundToInt
 
 class ForecastFragment : Fragment(), MVPForecast, MVPForecast.ForecastView {
     private lateinit var binding: FragmentForecastBinding
     private lateinit var forecastPresenter: ForecastPresenter
+    private lateinit var sharedPreferences: SharedPreferences
+    private var cityName: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +38,15 @@ class ForecastFragment : Fragment(), MVPForecast, MVPForecast.ForecastView {
     }
 
     private fun initForecastPresenter() {
+        initSharedPreference()
         forecastPresenter = ForecastPresenter(VolleyHandler(context), this)
-        forecastPresenter.getForecast()
+        forecastPresenter.getForecast(cityName?:"London")
+    }
+
+    private fun initSharedPreference() {
+        sharedPreferences =
+            context?.getSharedPreferences(Constant.SHARED_PREF_FILE, Context.MODE_PRIVATE)!!
+        cityName = sharedPreferences.getString(Constant.SHARED_PREF_CITY_KEY, "")
     }
 
     override fun onLoad(isLoading: Boolean) {
@@ -53,16 +62,25 @@ class ForecastFragment : Fragment(), MVPForecast, MVPForecast.ForecastView {
     }
 
     override fun setResult(forecastResponse: ForecastResponse) {
+        val tempConverter = { a: Double -> (a - ABSOLUTE_ZERO).roundToInt() }
+
         binding.recyclerViewForecast.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewForecast.adapter = ForecastAdapter(forecastResponse.list)
+        binding.apply {
+            forecastResponse.apply {
+                txtDegree.text = tempConverter(list[0].main.feels_like).toString() + "°C"
 
-        binding.txtDegree.text = Math.round(forecastResponse.list[0].main.feels_like-ABSOLUTE_ZERO).toString() + "°C"
-        binding.txtHuimdPercentage.text = forecastResponse.list[0].main.humidity.toString()
-        binding.txtWind.text = forecastResponse.city.name
-        binding.txtmin.text = Math.round(forecastResponse.list[0].main.temp_min-ABSOLUTE_ZERO).toString() + "° Min"
-        binding.txtmax.text = Math.round(forecastResponse.list[0].main.temp_max-ABSOLUTE_ZERO).toString() + "° Max"
+                txtHuimdPercentage.text = list[0].main.humidity.toString()
+                txtWind.text = forecastResponse.city.name
+                txtmin.text = tempConverter(list[0].main.temp_min-ABSOLUTE_ZERO).toString() + "° Min"
+                txtmax.text = tempConverter(list[0].main.temp_max-ABSOLUTE_ZERO).toString() + "° Max"
+            }
+        }
+    }
 
-
+    fun updateLocation(city: String) {
+        initSharedPreference()
+        forecastPresenter.getForecast(city)
     }
 }
