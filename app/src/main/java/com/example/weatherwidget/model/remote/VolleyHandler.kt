@@ -8,6 +8,7 @@ import com.example.weatherwidget.model.remote.Constant.API_KEY
 import com.example.weatherwidget.model.remote.Constant.BASE_URL
 import com.example.weatherwidget.model.remote.Constant.END_POINT_CITY_VALIDATE
 import com.example.weatherwidget.model.remote.Constant.END_POINT_FORECAST
+import com.example.weatherwidget.model.remote.Constant.END_POINT_WEATHER
 import com.example.weatherwidget.model.remote.Constant.END_POINT_ZIPCODE
 import com.example.weatherwidget.model.remote.data_airpollution.AirPollutionResponse
 import com.example.weatherwidget.model.remote.data_forecast.ForecastResponse
@@ -40,10 +41,10 @@ class VolleyHandler(private val context: Context?) {
         requestQueue.add(request)
     }
 
-    fun getForecastData(callback: OperationalCallbackForeCast) {
+    fun getForecastData(city: String, callback: OperationalCallbackForeCast) {
         val request = StringRequest(
             Request.Method.GET,
-            BASE_URL + END_POINT_FORECAST,
+            "$BASE_URL$END_POINT_FORECAST?q=$city&appid=$API_KEY",
             {
                 try {
                     val apiResponse = Gson().fromJson(it, ForecastResponse::class.java)

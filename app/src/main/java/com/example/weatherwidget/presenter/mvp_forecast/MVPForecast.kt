@@ -4,7 +4,7 @@ import com.example.weatherwidget.model.remote.data_forecast.ForecastResponse
 
 interface MVPForecast {
     interface ForecastPresenter {
-        fun getForecast()
+        fun getForecast(city: String)
     }
 
     interface ForecastView {
