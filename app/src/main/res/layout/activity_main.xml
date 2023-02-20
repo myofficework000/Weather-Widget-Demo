@@ -55,7 +55,7 @@
         >
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/dashboardFragment"
-            android:name="com.example.weatherwidget.fragment.DashboardFragment"
+            android:name="com.example.weatherwidget.view.fragment.DashboardFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_dashboard"

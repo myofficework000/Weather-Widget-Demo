@@ -1,4 +1,4 @@
-package com.example.weatherwidget.fragment
+package com.example.weatherwidget.view.fragment
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/appCardView"
     android:layout_width="@dimen/_size80dp"
     android:layout_height="@dimen/_size100dp"
-    style="@style/appCardView"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/forecast_color"
-    app:cardElevation="@dimen/_5dp" >
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="@dimen/_1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/custom_bg_gradient"
         android:orientation="vertical"
         android:weightSum="3">
 
         <TextView
             android:id="@+id/txtDay"
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Wed"
-            android:textStyle="bold"
-            android:textSize="@dimen/_14sp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-condensed"
             android:gravity="center"
-            android:textColor="@color/primary_text_color" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sp"
+            android:textStyle="bold"
+            tools:text="Wed" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgForecast"
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:src="@drawable/baseline_cloud_queue_24" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtForecastDegree"
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/txtDegree"
-            android:textSize="@dimen/_size16sp"
-            android:textStyle="bold"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/primary_text_color" />
+            android:text="@string/txtDegree"
+            android:textColor="@color/primary_text_color"
+            android:textSize="@dimen/_size16sp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>

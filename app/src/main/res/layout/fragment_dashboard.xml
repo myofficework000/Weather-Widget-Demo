@@ -19,7 +19,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/forecastFragmentView"
-            android:name="com.example.weatherwidget.fragment.ForecastFragment"
+            android:name="com.example.weatherwidget.view.fragment.ForecastFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@layout/fragment_forecast" />

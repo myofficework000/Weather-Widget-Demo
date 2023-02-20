@@ -1,14 +1,11 @@
-package com.example.weatherwidget.fragment
+package com.example.weatherwidget.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.weatherwidget.R
 import com.example.weatherwidget.databinding.FragmentDashboardBinding
-import com.example.weatherwidget.view.fragment.AirPollutionFragment
-import com.example.weatherwidget.view.fragment.WeatherFragment
 
 class DashboardFragment : Fragment() {
     private lateinit var binding: FragmentDashboardBinding
@@ -17,6 +14,10 @@ class DashboardFragment : Fragment() {
     }
     val weatherFragment by lazy{
         binding.weatherFragmentView.getFragment<WeatherFragment>()
+    }
+
+    val forecastFragment by lazy{
+        binding.forecastFragmentView.getFragment<ForecastFragment>()
     }
 
     override fun onCreateView(

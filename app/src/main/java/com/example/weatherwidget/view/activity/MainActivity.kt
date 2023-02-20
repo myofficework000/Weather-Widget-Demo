@@ -13,7 +13,7 @@ import com.example.weatherwidget.database.DatabaseHelper
 import com.example.weatherwidget.database.WeatherCityDao
 import com.example.weatherwidget.databinding.ActivityMainBinding
 import com.example.weatherwidget.databinding.AddCityWidgetBinding
-import com.example.weatherwidget.fragment.DashboardFragment
+import com.example.weatherwidget.view.fragment.DashboardFragment
 import com.example.weatherwidget.model.remote.Constant
 import com.example.weatherwidget.model.remote.VolleyHandler
 import com.example.weatherwidget.model.remote.data_zipcode.CityValidateResponse
@@ -177,6 +177,10 @@ class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
         )
 
         dashboardFragment.weatherFragment.updateLocation(
+            zipcodeResponse.name
+        )
+
+        dashboardFragment.forecastFragment.updateLocation(
             zipcodeResponse.name
         )
     }

@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ForecastFragment">
+    tools:context=".view.fragment.ForecastFragment">
 
     <androidx.cardview.widget.CardView
         style="@style/appCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/forecast_card_color"
-        app:cardElevation="@dimen/_5dp"
+        app:cardBackgroundColor="@color/transparent"
+        app:cardElevation="@dimen/_1dp"
         app:cardUseCompatPadding="true">
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -40,6 +40,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:background="@drawable/custom_bg_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_size10dp"
