@@ -39,5 +39,5 @@
     <string name="enter_zipcode">Enter zipcode</string>
     <string name="feels_like">"%d °C"</string>
     <string name="pollutants">Pollutants</string>
-
+    <string name="error">error</string>
 </resources>
