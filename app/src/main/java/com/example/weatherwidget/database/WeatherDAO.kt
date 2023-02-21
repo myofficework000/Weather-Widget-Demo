@@ -12,9 +12,7 @@ import com.example.weatherwidget.model.remote.data_zipcode.ZipcodeResponse
 
 class WeatherCityDao(private val databaseHelper: DatabaseHelper) {
     private val db: DatabaseHelper = databaseHelper
-    init {
 
-    }
     fun addCity(book: ZipcodeResponse) {
         val contentValue = ContentValues().apply {
             book.apply {
@@ -31,12 +29,13 @@ class WeatherCityDao(private val databaseHelper: DatabaseHelper) {
         }
     }
 
-    fun getAllCities() : ArrayList<ZipcodeResponse> {
+    private fun getAllCities(): ArrayList<ZipcodeResponse> {
         val cities = ArrayList<ZipcodeResponse>()
 
-        val cursor: Cursor = db.readableDatabase.query(CITY_TABLE_NAME, null, null, null, null, null, null, null)
+        val cursor: Cursor =
+            db.readableDatabase.query(CITY_TABLE_NAME, null, null, null, null, null, null, null)
 
-        if(cursor.count > 0) {
+        if (cursor.count > 0) {
             while (cursor.moveToNext()) {
                 val cityId = cursor.getInt(0) ?: 0
                 val zip = cursor.getString(1) ?: ""
@@ -51,7 +50,7 @@ class WeatherCityDao(private val databaseHelper: DatabaseHelper) {
         return cities
     }
 
-    fun updateBook(zipcodeResponse: ZipcodeResponse) {
+    private fun updateCity(zipcodeResponse: ZipcodeResponse) {
         val contentValue = ContentValues().apply {
             zipcodeResponse.apply {
                 put(ZIP_COL, zip)
@@ -65,11 +64,12 @@ class WeatherCityDao(private val databaseHelper: DatabaseHelper) {
         db.writableDatabase.apply {
             update(
                 CITY_TABLE_NAME, contentValue,
-                "$ZIP_COL = ${zipcodeResponse.zip}", null)
+                "$ZIP_COL = ${zipcodeResponse.zip}", null
+            )
         }
     }
 
-    fun deleteBook(zip: String) {
+    fun deleteCity(zip: String) {
         db.writableDatabase.apply {
             delete(CITY_TABLE_NAME, "$ZIP_COL = $zip", null)
             //close

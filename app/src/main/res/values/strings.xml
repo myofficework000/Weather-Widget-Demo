@@ -37,4 +37,6 @@
     <string name="add_city">Add city</string>
     <string name="get_city">Get city</string>
     <string name="enter_zipcode">Enter zipcode</string>
+    <string name="feels_like">"%d °C"</string>
+
 </resources>

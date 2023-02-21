@@ -1,4 +1,4 @@
-package com.example.weatherwidget.view
+package com.example.weatherwidget.view.activity
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -13,13 +13,13 @@ import com.example.weatherwidget.database.DatabaseHelper
 import com.example.weatherwidget.database.WeatherCityDao
 import com.example.weatherwidget.databinding.ActivityMainBinding
 import com.example.weatherwidget.databinding.AddCityWidgetBinding
-import com.example.weatherwidget.view.fragment.DashboardFragment
 import com.example.weatherwidget.model.remote.Constant
 import com.example.weatherwidget.model.remote.VolleyHandler
 import com.example.weatherwidget.model.remote.data_zipcode.CityValidateResponse
 import com.example.weatherwidget.model.remote.data_zipcode.ZipcodeResponse
 import com.example.weatherwidget.presenter.mvp_zipcode.MVPZipCode
 import com.example.weatherwidget.presenter.mvp_zipcode.ZipcodePresenter
+import com.example.weatherwidget.view.fragment.DashboardFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
@@ -60,7 +60,8 @@ class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
             this.getSharedPreferences(Constant.SHARED_PREF_FILE, Context.MODE_PRIVATE)
         checkThemeAndSetTheme(
             sharedPreferences.getLong(Constant.SHARED_PREF_CITY_SUNSET, 990909),
-            sharedPreferences.getLong(Constant.SHARED_PREF_CITY_TIME_NOW, 990909))
+            sharedPreferences.getLong(Constant.SHARED_PREF_CITY_TIME_NOW, 990909)
+        )
     }
 
     private fun initDatabase() {
@@ -117,39 +118,40 @@ class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
         addCityInfo(zipcodeResponse)
     }
 
-    override fun setCityValidateResult(cityValidateResponse: CityValidateResponse) {
-        bindingCityWidget.inputCity.setText(cityValidateResponse.name)
-        if (cityValidateResponse.cod == "200") {
-            val zipcodeResponse = ZipcodeResponse(
-                "",
-                cityValidateResponse.name,
-                cityValidateResponse.coord.lat,
-                cityValidateResponse.coord.lon,
-                cityValidateResponse.sys.country
-            )
-            val editor: SharedPreferences.Editor = sharedPreferences.edit()
-            editor.putLong(
-                Constant.SHARED_PREF_CITY_SUNSET,
-                cityValidateResponse.sys.sunset.toLong()
-            )
-            editor.putLong(
-                Constant.SHARED_PREF_CITY_TIME_NOW,
-                cityValidateResponse.dt.toLong()
-            )
-            editor.apply()
-            checkThemeAndSetTheme(
-                cityValidateResponse.sys.sunset.toLong(),
-                cityValidateResponse.dt.toLong()
-            )
-            addCityInfo(zipcodeResponse)
-        } else {
-            Toast.makeText(
-                this@MainActivity,
-                cityValidateResponse.message.toString(),
-                Toast.LENGTH_SHORT
-            ).show()
+    override fun setCityValidateResult(cityValidateResponse: CityValidateResponse) =
+        with(cityValidateResponse) {
+            bindingCityWidget.inputCity.setText(cityValidateResponse.name)
+            if (cod == "200") {
+                val zipcodeResponse = ZipcodeResponse(
+                    "",
+                    name,
+                    coord.lat,
+                    coord.lon,
+                    sys.country
+                )
+                val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                editor.putLong(
+                    Constant.SHARED_PREF_CITY_SUNSET,
+                    cityValidateResponse.sys.sunset.toLong()
+                )
+                editor.putLong(
+                    Constant.SHARED_PREF_CITY_TIME_NOW,
+                    dt.toLong()
+                )
+                editor.apply()
+                checkThemeAndSetTheme(
+                    sys.sunset.toLong(),
+                    dt.toLong()
+                )
+                addCityInfo(zipcodeResponse)
+            } else {
+                Toast.makeText(
+                    this@MainActivity,
+                    message,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
-    }
 
     private fun checkThemeAndSetTheme(timeSunset: Long, timeNow: Long) {
         if (timeSunset > timeNow) {
@@ -161,27 +163,20 @@ class MainActivity : AppCompatActivity(), MVPZipCode.ZipcodeView {
         }
     }
 
-    fun addCityInfo(zipcodeResponse: ZipcodeResponse) {
+    private fun addCityInfo(zipcodeResponse: ZipcodeResponse) = with(zipcodeResponse) {
         weatherCityDao.addCity(zipcodeResponse)
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        editor.putString(Constant.SHARED_PREF_CITY_KEY, zipcodeResponse.name)
-        editor.putString(Constant.SHARED_PREF_CITY_LAT, zipcodeResponse.lat)
-        editor.putString(Constant.SHARED_PREF_CITY_LON, zipcodeResponse.lon)
+        editor.putString(Constant.SHARED_PREF_CITY_KEY, name)
+        editor.putString(Constant.SHARED_PREF_CITY_LAT, lat)
+        editor.putString(Constant.SHARED_PREF_CITY_LON, lon)
         editor.apply()
-        editor.commit()
         Toast.makeText(this@MainActivity, "City added!", Toast.LENGTH_SHORT).show()
 
         dashboardFragment.airPollutionFragment.updateLocation(
-            zipcodeResponse.lat.toDouble(),
-            zipcodeResponse.lon.toDouble()
+            lat.toDouble(),
+            lon.toDouble()
         )
-
-        dashboardFragment.weatherFragment.updateLocation(
-            zipcodeResponse.name
-        )
-
-        dashboardFragment.forecastFragment.updateLocation(
-            zipcodeResponse.name
-        )
+        dashboardFragment.weatherFragment.updateLocation(name)
+        dashboardFragment.forecastFragment.updateLocation(name)
     }
 }

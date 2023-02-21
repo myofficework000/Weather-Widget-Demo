@@ -26,6 +26,4 @@ class DashboardFragment : Fragment() {
     ): View = FragmentDashboardBinding.inflate(inflater, container, false).apply {
         binding = this
     }.root
-
-
 }

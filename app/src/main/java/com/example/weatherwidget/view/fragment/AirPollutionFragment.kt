@@ -3,12 +3,12 @@ package com.example.weatherwidget.view.fragment
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import com.example.weatherwidget.R
 import com.example.weatherwidget.databinding.FragmentAirPollutionBinding
 import com.example.weatherwidget.model.remote.Constant
@@ -66,7 +66,7 @@ class AirPollutionFragment : Fragment(), MVPAirPollution.IView {
             AlertDialog.Builder(requireContext())
                 .setTitle(getString(R.string.api_error_title))
                 .setMessage(getString(R.string.api_error_message))
-                .setNegativeButton(getString(R.string.negative_button_1)) { _, _->}
+                .setNegativeButton(getString(R.string.negative_button_1)) { _, _ -> }
                 .show()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -74,29 +74,31 @@ class AirPollutionFragment : Fragment(), MVPAirPollution.IView {
     }
 
     private fun initializeLocation() {
-        val lat = sharedPreferences.getString(Constant.SHARED_PREF_CITY_LAT, "")?: ""
-        val lon = sharedPreferences.getString(Constant.SHARED_PREF_CITY_LON, "")?: ""
+        val lat = sharedPreferences.getString(Constant.SHARED_PREF_CITY_LAT, "") ?: ""
+        val lon = sharedPreferences.getString(Constant.SHARED_PREF_CITY_LON, "") ?: ""
         if (lat.isNotEmpty() && lon.isNotEmpty()) {
             updateLocation(lat.toDouble(), lon.toDouble())
         } else {
-            updateLocation(Constant.PLACEHOLDER_COORDS.first,Constant.PLACEHOLDER_COORDS.second)
+            updateLocation(Constant.PLACEHOLDER_COORDS.first, Constant.PLACEHOLDER_COORDS.second)
         }
     }
 
     fun updateLocation(latitude: Double, longitude: Double) =
-        presenter.getAirPollutionData(latitude,longitude)
+        presenter.getAirPollutionData(latitude, longitude)
 
     private fun updateSummary(dataType: Constant.AirPollutionDataType) {
         pollutionData?.let {
             if (it.isNotEmpty()) {
                 val mostRecentDataFraction = presenter.getAirPollutionDataFraction(
-                    dataType, mostRecentPollutionData)
+                    dataType, mostRecentPollutionData
+                )
                 binding.airPollutionSummaryText.text =
                     presenter.getAirPollutionSummaryText((mostRecentDataFraction * 5).toInt())
                 ObjectAnimator.ofFloat(
-                        binding.airPollutionSummaryBar,
-                        "value",
-                        mostRecentDataFraction.toFloat())
+                    binding.airPollutionSummaryBar,
+                    "value",
+                    mostRecentDataFraction.toFloat()
+                )
                     .apply {
                         duration = 500
                         interpolator = DecelerateInterpolator()
@@ -111,12 +113,14 @@ class AirPollutionFragment : Fragment(), MVPAirPollution.IView {
     }
 
     private fun getAirPollutionSummaryLabel(dataType: Constant.AirPollutionDataType) =
-        when(dataType) {
-            Constant.AirPollutionDataType.CAQI -> resources.getString(R.string.airPollutionCaqi)
-            Constant.AirPollutionDataType.NO2 -> resources.getString(R.string.airPollutionNo2)
-            Constant.AirPollutionDataType.O3 -> resources.getString(R.string.airPollutionO3)
-            Constant.AirPollutionDataType.PM2_5 -> resources.getString(R.string.airPollutionPm2_5)
-            Constant.AirPollutionDataType.PM10 -> resources.getString(R.string.airPollutionPm10)
-            else -> ""
+        with(resources) {
+            when (dataType) {
+                Constant.AirPollutionDataType.CAQI -> getString(R.string.airPollutionCaqi)
+                Constant.AirPollutionDataType.NO2 -> getString(R.string.airPollutionNo2)
+                Constant.AirPollutionDataType.O3 -> getString(R.string.airPollutionO3)
+                Constant.AirPollutionDataType.PM2_5 -> getString(R.string.airPollutionPm2_5)
+                Constant.AirPollutionDataType.PM10 -> getString(R.string.airPollutionPm10)
+                else -> ""
+            }
         }
 }

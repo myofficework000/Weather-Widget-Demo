@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.weatherwidget.R
 import com.example.weatherwidget.databinding.FragmentForecastBinding
 import com.example.weatherwidget.model.remote.Constant
 import com.example.weatherwidget.model.remote.Constant.ABSOLUTE_ZERO
@@ -40,7 +41,7 @@ class ForecastFragment : Fragment(), MVPForecast, MVPForecast.ForecastView {
     private fun initForecastPresenter() {
         initSharedPreference()
         forecastPresenter = ForecastPresenter(VolleyHandler(context), this)
-        forecastPresenter.getForecast(cityName?:"London")
+        forecastPresenter.getForecast(cityName ?: "London")
     }
 
     private fun initSharedPreference() {
@@ -50,7 +51,7 @@ class ForecastFragment : Fragment(), MVPForecast, MVPForecast.ForecastView {
     }
 
     override fun onLoad(isLoading: Boolean) {
-        if(isLoading){
+        if (isLoading) {
             binding.loader.visibility = View.VISIBLE
         } else {
             binding.loader.visibility = View.GONE
@@ -65,16 +66,18 @@ class ForecastFragment : Fragment(), MVPForecast, MVPForecast.ForecastView {
         val tempConverter = { a: Double -> (a - ABSOLUTE_ZERO).roundToInt() }
 
         binding.recyclerViewForecast.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.recyclerViewForecast.adapter = ForecastAdapter(forecastResponse.list)
         binding.apply {
             forecastResponse.apply {
-                txtDegree.text = tempConverter(list[0].main.feels_like).toString() + "°C"
-
+                txtDegree.text =
+                    getString(R.string.feels_like, tempConverter(list[0].main.feels_like))
                 txtHuimdPercentage.text = list[0].main.humidity.toString()
                 txtWind.text = forecastResponse.city.name
-                txtmin.text = tempConverter(list[0].main.temp_min-ABSOLUTE_ZERO).toString() + "° Min"
-                txtmax.text = tempConverter(list[0].main.temp_max-ABSOLUTE_ZERO).toString() + "° Max"
+                txtmin.text =
+                    tempConverter(list[0].main.temp_min - ABSOLUTE_ZERO).toString() + "° Min"
+                txtmax.text =
+                    tempConverter(list[0].main.temp_max - ABSOLUTE_ZERO).toString() + "° Max"
             }
         }
     }
