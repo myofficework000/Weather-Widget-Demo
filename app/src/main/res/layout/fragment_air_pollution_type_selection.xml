@@ -4,10 +4,7 @@
     style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/design_default_color_secondary"
-    android:divider="@color/black"
     android:orientation="vertical"
-    android:showDividers="middle"
     tools:context=".view.fragment.AirPollutionTypeSelectionSheet">
 
     <TextView
@@ -15,103 +12,120 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Select data to display:"
+        android:padding="@dimen/_5dp"
+        android:background="@drawable/curstom_bg_3"
+        android:text="@string/pollutants"
         android:textAlignment="center"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-black"
         android:textColor="@color/design_default_color_on_secondary"
         android:textSize="@dimen/title_medium" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/airPollutionTypeCaqi"
-        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@drawable/custom_bg_2"
+        android:layout_margin="@dimen/_10dp"
+        android:layout_height="30dp"
+        android:textColor="@color/design_default_color_on_primary"
         android:text="CAQI (overall)"
         android:textAllCaps="false"
-        android:textColor="@color/design_default_color_on_secondary" />
+         />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/airPollutionTypeCo"
-        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Carbon Monoxide (CO)"
+        android:background="@drawable/custom_bg_2"
+        android:layout_margin="@dimen/_10dp"
+        android:layout_height="30dp"
+        android:textColor="@color/design_default_color_on_primary"
         android:textAllCaps="false"
-        android:textColor="@color/design_default_color_on_secondary"
         android:visibility="gone" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/airPollutionTypeNo"
-        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Nitrogen Monoxide (NO)"
         android:textAllCaps="false"
-        android:textColor="@color/design_default_color_on_secondary"
+        android:background="@drawable/custom_bg_2"
+        android:layout_margin="@dimen/_10dp"
+        android:layout_height="30dp"
+        android:textColor="@color/design_default_color_on_primary"
         android:visibility="gone" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/airPollutionTypeNo2"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_weight="1"
+        android:background="@drawable/custom_bg_2"
         android:text="@string/airPollutionNo2"
         android:textAllCaps="false"
-        android:textColor="@color/design_default_color_on_secondary" />
+        android:layout_margin="@dimen/_10dp"
+        android:textColor="@color/primary_text_color" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/airPollutionTypeO3"
-        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_weight="1"
         android:text="@string/airPollutionO3"
         android:textAllCaps="false"
-        android:textColor="@color/design_default_color_on_secondary" />
+        android:layout_margin="@dimen/_10dp"
+        android:background="@drawable/custom_bg_2"
+        android:textColor="@color/primary_text_color" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/airPollutionTypeSo2"
-        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_weight="1"
         android:text="Sulfur Dioxide (SO2)"
         android:textAllCaps="false"
-        android:textColor="@color/design_default_color_on_secondary"
+        android:layout_margin="@dimen/_10dp"
+        android:background="@drawable/custom_bg_2"
+        android:textColor="@color/primary_text_color"
         android:visibility="gone" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/airPollutionTypePm2_5"
-        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_weight="1"
         android:text="@string/airPollutionPm2_5"
         android:textAllCaps="false"
-        android:textColor="@color/design_default_color_on_secondary" />
+        android:layout_margin="@dimen/_10dp"
+        android:background="@drawable/custom_bg_2"
+        android:textColor="@color/primary_text_color"
+         />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/airPollutionTypePm10"
-        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_weight="1"
         android:text="@string/airPollutionPm10"
         android:textAllCaps="false"
-        android:textColor="@color/design_default_color_on_secondary" />
+        android:layout_margin="@dimen/_10dp"
+        android:background="@drawable/custom_bg_2"
+        android:textColor="@color/primary_text_color"
+         />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/airPollutionTypeNh3"
-        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_weight="1"
         android:text="Ammonia (NH3)"
         android:textAllCaps="false"
-        android:textColor="@color/design_default_color_on_secondary"
+        android:layout_margin="@dimen/_10dp"
+        android:background="@drawable/custom_bg_2"
+        android:textColor="@color/primary_text_color"
         android:visibility="gone" />
 
 </LinearLayout>
